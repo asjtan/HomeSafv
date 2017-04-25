@@ -70,6 +70,9 @@
 		887973871EAF64230005D444 /* HomeSafv */ = {
 			isa = PBXGroup;
 			children = (
+				8879739F1EAF6A620005D444 /* View */,
+				8879739E1EAF6A5D0005D444 /* Model */,
+				8879739D1EAF6A550005D444 /* Controller */,
 				887973881EAF64240005D444 /* AppDelegate.swift */,
 				8879738A1EAF64240005D444 /* ViewController.swift */,
 				8879738C1EAF64240005D444 /* Main.storyboard */,
@@ -78,6 +81,27 @@
 				887973941EAF64240005D444 /* Info.plist */,
 			);
 			path = HomeSafv;
+			sourceTree = "<group>";
+		};
+		8879739D1EAF6A550005D444 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		8879739E1EAF6A5D0005D444 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8879739F1EAF6A620005D444 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		E2966A316961ABE708EF535E /* Frameworks */ = {
@@ -381,6 +405,7 @@
 				887973991EAF64240005D444 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
