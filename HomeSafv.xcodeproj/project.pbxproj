@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F028252B10663F8A412C162 /* Pods_HomeSafv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D6C1D94C243B330B9D390E0 /* Pods_HomeSafv.framework */; };
 		887973891EAF64240005D444 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887973881EAF64240005D444 /* AppDelegate.swift */; };
 		8879738B1EAF64240005D444 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879738A1EAF64240005D444 /* ViewController.swift */; };
 		8879738E1EAF64240005D444 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8879738C1EAF64240005D444 /* Main.storyboard */; };
@@ -15,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		569B47CB0712604851F8C3F2 /* Pods-HomeSafv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeSafv.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeSafv/Pods-HomeSafv.debug.xcconfig"; sourceTree = "<group>"; };
+		5D6C1D94C243B330B9D390E0 /* Pods_HomeSafv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeSafv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		887973851EAF64230005D444 /* HomeSafv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeSafv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		887973881EAF64240005D444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8879738A1EAF64240005D444 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,7 @@
 		8879738F1EAF64240005D444 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		887973921EAF64240005D444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		887973941EAF64240005D444 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1236959D934798344A0D0F7 /* Pods-HomeSafv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeSafv.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeSafv/Pods-HomeSafv.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F028252B10663F8A412C162 /* Pods_HomeSafv.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		364E56D78E07C50CD475D161 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				569B47CB0712604851F8C3F2 /* Pods-HomeSafv.debug.xcconfig */,
+				F1236959D934798344A0D0F7 /* Pods-HomeSafv.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8879737C1EAF64230005D444 = {
 			isa = PBXGroup;
 			children = (
 				887973871EAF64230005D444 /* HomeSafv */,
 				887973861EAF64230005D444 /* Products */,
+				364E56D78E07C50CD475D161 /* Pods */,
+				E2966A316961ABE708EF535E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +80,14 @@
 			path = HomeSafv;
 			sourceTree = "<group>";
 		};
+		E2966A316961ABE708EF535E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5D6C1D94C243B330B9D390E0 /* Pods_HomeSafv.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 887973971EAF64240005D444 /* Build configuration list for PBXNativeTarget "HomeSafv" */;
 			buildPhases = (
+				523FFD2B0B8C000FA1525462 /* [CP] Check Pods Manifest.lock */,
 				887973811EAF64230005D444 /* Sources */,
 				887973821EAF64230005D444 /* Frameworks */,
 				887973831EAF64230005D444 /* Resources */,
+				D2FFB6AF345A334210738E25 /* [CP] Embed Pods Frameworks */,
+				3B4AABFFEB99A428E78B3E81 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B4AABFFEB99A428E78B3E81 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HomeSafv/Pods-HomeSafv-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		523FFD2B0B8C000FA1525462 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D2FFB6AF345A334210738E25 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HomeSafv/Pods-HomeSafv-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		887973811EAF64230005D444 /* Sources */ = {
@@ -261,6 +336,7 @@
 		};
 		887973981EAF64240005D444 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 569B47CB0712604851F8C3F2 /* Pods-HomeSafv.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 65555YK7TP;
@@ -274,6 +350,7 @@
 		};
 		887973991EAF64240005D444 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1236959D934798344A0D0F7 /* Pods-HomeSafv.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 65555YK7TP;
