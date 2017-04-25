@@ -76,9 +76,9 @@ class LoginVC: UIViewController, UITextFieldDelegate, UINavigationControllerDele
         }
     }
     
-    func pushTomainView() {
-        /*let vc = self.storyboard?.instantiateViewController(withIdentifier: "Navigation") as! NavVC
-        self.show(vc, sender: nil)*/
+    func pushToNav() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Navigation") as! MainVC
+        self.show(vc, sender: nil)
     }
     
     func openPhotoPickerWith(source: PhotoSource) {
@@ -125,22 +125,22 @@ class LoginVC: UIViewController, UITextFieldDelegate, UINavigationControllerDele
             item.resignFirstResponder()
         }
         self.showLoading(state: true)
-        /*User.registerUser(withName: self.registerNameField.text!, email: self.registerEmailField.text!, password: self.registerPasswordField.text!, profilePic: self.profilePicView.image!) { [weak weakSelf = self] (status) in
+        User.registerUser(withName: self.registerName.text!, email: self.registerEmail.text!, password: self.registerPassword.text!, profilePic: self.profilePic.image!) { [weak weakSelf = self] (status) in
             DispatchQueue.main.async {
                 weakSelf?.showLoading(state: false)
                 for item in self.inputFields {
                     item.text = ""
                 }
                 if status == true {
-                    weakSelf?.pushTomainView()
-                    weakSelf?.profilePicView.image = UIImage.init(named: "profile pic")
+                    weakSelf?.pushToNav()
+                    weakSelf?.profilePic.image = UIImage.init(named: "profile pic")
                 } else {
-                    for item in (weakSelf?.waringLabels)! {
+                    for item in (weakSelf?.warningLabels)! {
                         item.isHidden = false
                     }
                 }
             }
-        }*/
+        }
     }
     
     @IBAction func login(_ sender: Any) {
@@ -148,22 +148,22 @@ class LoginVC: UIViewController, UITextFieldDelegate, UINavigationControllerDele
             item.resignFirstResponder()
         }
         self.showLoading(state: true)
-        /*User.loginUser(withEmail: self.loginEmailField.text!, password: self.loginPasswordField.text!) { [weak weakSelf = self](status) in
+        User.loginUser(withEmail: self.loginEmail.text!, password: self.loginPassword.text!) { [weak weakSelf = self](status) in
             DispatchQueue.main.async {
                 weakSelf?.showLoading(state: false)
                 for item in self.inputFields {
                     item.text = ""
                 }
                 if status == true {
-                    weakSelf?.pushTomainView()
+                    weakSelf?.pushToNav()
                 } else {
-                    for item in (weakSelf?.waringLabels)! {
+                    for item in (weakSelf?.warningLabels)! {
                         item.isHidden = false
                     }
                 }
                 weakSelf = nil
             }
-        }*/
+        }
     }
     
     @IBAction func selectPic(_ sender: Any) {

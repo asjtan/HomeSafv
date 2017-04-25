@@ -41,5 +41,21 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Photos will be used for setting profile picture or sending to friends</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Location will be used for to share with friends</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location will be used for to share with friends</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photos will be used for setting profile picture or sending to friends</string>
+	<key>UIStatusBarHidden</key>
+	<false/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 </dict>
 </plist>
