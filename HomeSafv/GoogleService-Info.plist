@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>629176585968-ui89knbvmu5v4m4fdkerp56t020lul62.apps.googleusercontent.com</string>
+	<string>788530420082-ga5sqbfhnrn196ctp0pbr2v9tnljh99h.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.629176585968-ui89knbvmu5v4m4fdkerp56t020lul62</string>
+	<string>com.googleusercontent.apps.788530420082-ga5sqbfhnrn196ctp0pbr2v9tnljh99h</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB6TPrCwouRigdtfxDIPG0YyCfYk47QDBQ</string>
+	<string>AIzaSyBeThrJPBSLMAKgV9p-E7BHtKXp61d12XA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>629176585968</string>
+	<string>788530420082</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.nus.ca.proj</string>
+	<string>com.nus.ios.HomeSafv</string>
 	<key>PROJECT_ID</key>
-	<string>safely-home-550dc</string>
+	<string>homesafv</string>
 	<key>STORAGE_BUCKET</key>
-	<string>safely-home-550dc.appspot.com</string>
+	<string>homesafv.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:629176585968:ios:c4fd136f5edc478a</string>
+	<string>1:788530420082:ios:63c51e55a224cdd6</string>
 	<key>DATABASE_URL</key>
-	<string>https://safely-home-550dc.firebaseio.com</string>
+	<string>https://homesafv.firebaseio.com</string>
 </dict>
 </plist>

@@ -13,7 +13,6 @@
 		8879738E1EAF64240005D444 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8879738C1EAF64240005D444 /* Main.storyboard */; };
 		887973901EAF64240005D444 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8879738F1EAF64240005D444 /* Assets.xcassets */; };
 		887973931EAF64240005D444 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 887973911EAF64240005D444 /* LaunchScreen.storyboard */; };
-		887973A11EAF87450005D444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 887973A01EAF87450005D444 /* GoogleService-Info.plist */; };
 		887973A31EAF88050005D444 /* Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887973A21EAF88050005D444 /* Generic.swift */; };
 		887973A51EAF90910005D444 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887973A41EAF90910005D444 /* User.swift */; };
 		887973A71EAF90D80005D444 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887973A61EAF90D80005D444 /* Message.swift */; };
@@ -21,6 +20,7 @@
 		887973AB1EAF914B0005D444 /* newMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 887973AA1EAF914B0005D444 /* newMessage.wav */; };
 		887973AD1EAF93B40005D444 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887973AC1EAF93B40005D444 /* MainVC.swift */; };
 		887973AF1EAF97F10005D444 /* CellObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887973AE1EAF97F10005D444 /* CellObjects.swift */; };
+		887973B11EAF9CF20005D444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 887973B01EAF9CF20005D444 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,6 @@
 		8879738F1EAF64240005D444 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		887973921EAF64240005D444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		887973941EAF64240005D444 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		887973A01EAF87450005D444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		887973A21EAF88050005D444 /* Generic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generic.swift; sourceTree = "<group>"; };
 		887973A41EAF90910005D444 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		887973A61EAF90D80005D444 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -41,6 +40,7 @@
 		887973AA1EAF914B0005D444 /* newMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newMessage.wav; sourceTree = "<group>"; };
 		887973AC1EAF93B40005D444 /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		887973AE1EAF97F10005D444 /* CellObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellObjects.swift; sourceTree = "<group>"; };
+		887973B01EAF9CF20005D444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F1236959D934798344A0D0F7 /* Pods-HomeSafv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeSafv.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeSafv/Pods-HomeSafv.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,8 +94,8 @@
 				8879738F1EAF64240005D444 /* Assets.xcassets */,
 				887973911EAF64240005D444 /* LaunchScreen.storyboard */,
 				887973941EAF64240005D444 /* Info.plist */,
-				887973A01EAF87450005D444 /* GoogleService-Info.plist */,
 				887973AA1EAF914B0005D444 /* newMessage.wav */,
+				887973B01EAF9CF20005D444 /* GoogleService-Info.plist */,
 			);
 			path = HomeSafv;
 			sourceTree = "<group>";
@@ -200,8 +200,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				887973931EAF64240005D444 /* LaunchScreen.storyboard in Resources */,
-				887973A11EAF87450005D444 /* GoogleService-Info.plist in Resources */,
 				887973901EAF64240005D444 /* Assets.xcassets in Resources */,
+				887973B11EAF9CF20005D444 /* GoogleService-Info.plist in Resources */,
 				887973AB1EAF914B0005D444 /* newMessage.wav in Resources */,
 				8879738E1EAF64240005D444 /* Main.storyboard in Resources */,
 			);
