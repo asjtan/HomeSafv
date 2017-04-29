@@ -63,7 +63,7 @@ class ConversationsTBCell: UITableViewCell {
         self.messageLabel.font = UIFont(name:"AvenirNext-Regular", size: 14.0)
         self.timeLabel.font = UIFont(name:"AvenirNext-Regular", size: 13.0)
         self.profilePic.layer.borderColor = GlobalVariables.purple.cgColor
-        self.messageLabel.textColor = UIColor.rbg(r: 111, g: 113, b: 121)
+        self.messageLabel.textColor = GlobalVariables.purple
     }
     
     override func awakeFromNib() {
