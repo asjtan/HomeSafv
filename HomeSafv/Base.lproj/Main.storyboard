@@ -897,7 +897,7 @@
                                     </connections>
                                 </collectionViewCell>
                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Empty Cell" id="3FP-pA-YI6" customClass="ContactsCVCell" customModule="HomeSafv" customModuleProvider="target">
-                                    <rect key="frame" x="130" y="7" width="119" height="110"/>
+                                    <rect key="frame" x="130" y="6.5" width="119" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                         <rect key="frame" x="0.0" y="0.0" width="119" height="110"/>
@@ -953,6 +953,7 @@
                             </state>
                             <connections>
                                 <action selector="scanQrCode:" destination="AGC-2Q-dlk" eventType="touchUpInside" id="q6x-39-tdG"/>
+                                <segue destination="rXj-Sh-sR8" kind="show" id="iZd-mI-3fU"/>
                             </connections>
                         </button>
                     </subviews>
@@ -1149,6 +1150,24 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="996" y="139"/>
+        </scene>
+        <!--Scanner View Controller-->
+        <scene sceneID="ESx-CO-Dvu">
+            <objects>
+                <viewController id="rXj-Sh-sR8" customClass="ScannerViewController" customModule="HomeSafv" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OjI-d3-Glw"/>
+                        <viewControllerLayoutGuide type="bottom" id="c4L-md-UCW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3SF-80-R6I">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lz6-fs-o35" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1394" y="903"/>
         </scene>
     </scenes>
     <resources>
