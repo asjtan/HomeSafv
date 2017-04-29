@@ -9,17 +9,16 @@
 import AVFoundation
 import UIKit
 
+
+protocol ScannerViewControllerDelegate {
+    func finishScan(controller: ScannerViewController, data: String)
+}
+
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     
-    var qrcode: String?
-    var qrCode: String? {
-        get {
-            return qrcode
-        }
-    }    
-    
+    var delegate: ScannerViewControllerDelegate? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,10 +106,16 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         dismiss(animated: true)
     }
     
+    
     func found(code: String) {
         
-        qrcode = code
-        print(code)
+        guard let delegate = self.delegate else {
+            print("delegate not set")
+            return
+        }
+        //print(code)
+        
+        delegate.finishScan(controller: self, data: code)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -143,5 +148,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
         
     }
+
     
 }

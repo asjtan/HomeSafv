@@ -101,6 +101,12 @@ class User: NSObject {
         })
     }
     
+    class func addContact(userEmail: String, contactName: String, contactEmail: String){
+        // currently as the users in databse
+        // to be improved: add contacts table for user
+    }
+
+    
     class func checkUserVerification(completion: @escaping (Bool) -> Swift.Void) {
         FIRAuth.auth()?.currentUser?.reload(completion: { (_) in
             let status = (FIRAuth.auth()?.currentUser?.isEmailVerified)!

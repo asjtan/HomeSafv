@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import MapKit
 
-class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, ScannerViewControllerDelegate {
     @IBOutlet var contactsView: UIView!
     @IBOutlet var mapView: UIView!
     @IBOutlet var previewView: UIView!
@@ -95,7 +95,7 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         self.fetchUserInfo()
         
         profileView.bringSubview(toFront: qrCodeImg)
-        qrCodeImg.image = generateQRCode(from: emailLbl.text!)
+        qrCodeImg.image = generateQRCode(from:  nameLbl.text! + "|" + emailLbl.text!)
     }
     
     func dismissExtraViews() {
@@ -190,10 +190,6 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         } else {
             self.scrollView.setZoomScale(1, animated: true)
         }
-    }
-    
-    @IBAction func scanQrCode(_ sender: Any) {
-        
     }
     
     
@@ -298,6 +294,21 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.view.transform = CGAffineTransform.identity
-    }    
-
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "scan qr code" {
+            let scanVC = segue.destination as! ScannerViewController
+            scanVC.delegate = self
+        }
+    }
+    
+    func finishScan(controller: ScannerViewController, data: String) {
+        let arr = data.components(separatedBy: "|")
+        let name = arr[0]
+        let email = arr[1]
+        
+        User.addContact(userEmail: emailLbl.text!, contactName: name, contactEmail: email)
+    }
 }

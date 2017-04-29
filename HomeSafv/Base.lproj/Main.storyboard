@@ -943,8 +943,6 @@
                             <rect key="frame" x="247" y="262" width="120" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="120" id="Gtq-T1-MSc"/>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="IQE-B1-5Gp"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="i3R-la-xnu"/>
                                 <constraint firstAttribute="height" constant="40" id="rzs-FM-LWc"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
@@ -952,8 +950,7 @@
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
-                                <action selector="scanQrCode:" destination="AGC-2Q-dlk" eventType="touchUpInside" id="q6x-39-tdG"/>
-                                <segue destination="rXj-Sh-sR8" kind="show" id="iZd-mI-3fU"/>
+                                <segue destination="rXj-Sh-sR8" kind="show" identifier="scan qr code" id="f1R-IM-4eg"/>
                             </connections>
                         </button>
                     </subviews>
@@ -962,7 +959,6 @@
                         <constraint firstAttribute="bottom" secondItem="8Rn-cw-Vgu" secondAttribute="bottom" constant="20" id="2xM-hn-ai4"/>
                         <constraint firstItem="qQc-iN-Ig9" firstAttribute="leading" secondItem="ujT-MK-7J8" secondAttribute="leading" constant="20" id="E8I-vQ-J7v"/>
                         <constraint firstAttribute="bottom" secondItem="qQc-iN-Ig9" secondAttribute="bottom" constant="20" id="gw5-LS-20m"/>
-                        <constraint firstAttribute="bottom" secondItem="qQc-iN-Ig9" secondAttribute="bottom" constant="20" id="rcZ-X6-iYB"/>
                         <constraint firstAttribute="trailing" secondItem="8Rn-cw-Vgu" secondAttribute="trailing" constant="20" id="uO1-F7-v4L"/>
                     </constraints>
                 </view>
@@ -1146,7 +1142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lz6-fs-o35" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1394" y="903"/>
+            <point key="canvasLocation" x="1649" y="872"/>
         </scene>
     </scenes>
     <resources>
