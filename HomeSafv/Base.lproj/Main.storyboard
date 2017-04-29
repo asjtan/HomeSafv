@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -412,7 +412,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oCf-eV-l9A">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="573"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="jws-JE-7UW" customClass="ConversationsTBCell" customModule="HomeSafv" customModuleProvider="target">
@@ -517,17 +517,27 @@
                                     <constraint firstItem="0Ra-sd-82b" firstAttribute="height" secondItem="G07-B2-DNg" secondAttribute="height" id="wVc-hg-heM"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GH5-Gv-bsk">
+                                <rect key="frame" x="16" y="558" width="334" height="101"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                <state key="normal" title="HELP"/>
+                                <connections>
+                                    <action selector="CallHelp:" destination="aVH-i8-BeZ" eventType="touchUpInside" id="qmb-r1-6z7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="GH5-Gv-bsk" firstAttribute="top" secondItem="oCf-eV-l9A" secondAttribute="bottom" constant="8" id="3a2-96-xmk"/>
                             <constraint firstAttribute="trailing" secondItem="G07-B2-DNg" secondAttribute="trailing" id="5x7-wA-5CT"/>
+                            <constraint firstItem="Ahq-XA-d9y" firstAttribute="top" secondItem="GH5-Gv-bsk" secondAttribute="bottom" constant="8" id="670-fv-ngv"/>
                             <constraint firstItem="oCf-eV-l9A" firstAttribute="top" secondItem="DRv-UJ-tfT" secondAttribute="top" id="6Sx-ft-f3S"/>
                             <constraint firstItem="G07-B2-DNg" firstAttribute="leading" secondItem="DRv-UJ-tfT" secondAttribute="leading" id="D6M-V8-x4e"/>
+                            <constraint firstItem="GH5-Gv-bsk" firstAttribute="centerX" secondItem="DRv-UJ-tfT" secondAttribute="centerX" id="Of4-Cs-xPe"/>
                             <constraint firstAttribute="trailing" secondItem="oCf-eV-l9A" secondAttribute="trailing" id="Wct-ie-Bji"/>
                             <constraint firstItem="oCf-eV-l9A" firstAttribute="leading" secondItem="DRv-UJ-tfT" secondAttribute="leading" id="c4X-bH-uQV"/>
                             <constraint firstItem="G07-B2-DNg" firstAttribute="width" secondItem="DRv-UJ-tfT" secondAttribute="width" id="it1-dJ-SaS"/>
                             <constraint firstItem="Ahq-XA-d9y" firstAttribute="top" secondItem="G07-B2-DNg" secondAttribute="bottom" constant="-40" id="o3j-GP-IAM"/>
-                            <constraint firstItem="Ahq-XA-d9y" firstAttribute="top" secondItem="oCf-eV-l9A" secondAttribute="bottom" id="tku-qf-0bc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Conversations" id="bna-Do-xRO"/>
@@ -539,7 +549,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZhO-Dc-oin" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1815" y="139"/>
+            <point key="canvasLocation" x="1813.5999999999999" y="138.98050974512745"/>
         </scene>
         <!--Chat-->
         <scene sceneID="jXl-EH-6Wf">

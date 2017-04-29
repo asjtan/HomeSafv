@@ -9,8 +9,9 @@
 import UIKit
 import Firebase
 import AudioToolbox
+import CoreLocation
 
-class ConversationVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ConversationVC: UIViewController, UITableViewDelegate, UITableViewDataSource,CLLocationManagerDelegate  {
     @IBOutlet weak var alertBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     lazy var leftButton: UIBarButtonItem = {
@@ -51,6 +52,7 @@ class ConversationVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
             })
         }
+        self.locationManager.delegate = self
     }
     
     func fetchData() {
@@ -174,6 +176,69 @@ class ConversationVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.selectedUser = self.items[indexPath.row].user
             self.performSegue(withIdentifier: "segue", sender: self)
         }
+    }
+
+    
+    
+    let locationManager = CLLocationManager()
+    
+    var canSendLocation = true
+    
+    @IBAction func CallHelp(_ sender: UIButton) {
+        if let id = FIRAuth.auth()?.currentUser?.uid
+        {
+            User.downloadAllUsers(exceptID: id, completion: {(user) in
+                DispatchQueue.main.async {
+                    self.composeMessage(type: .text, content: user.name + " Help Me!",userID: user.id)
+                    
+                }
+            })
+        }
+        self.canSendLocation = true
+        if self.checkLocationPermission(){
+            self.locationManager.startUpdatingLocation()
+        }
+        else {
+            self.locationManager.requestWhenInUseAuthorization()}
+        self.tableView.reloadData()
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.locationManager.stopUpdatingLocation()
+        if let lastLocation = locations.last {
+            if self.canSendLocation {
+                let coordinate = String(lastLocation.coordinate.latitude) + ":" + String(lastLocation.coordinate.longitude)
+                let message = Message.init(type: .location, content: coordinate, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false)
+                if let id = FIRAuth.auth()?.currentUser?.uid
+                {
+                    User.downloadAllUsers(exceptID: id, completion: {(user) in
+                        DispatchQueue.main.async {
+                            Message.send(message: message, toID: user.id, completion: {(_) in})
+                        }})}
+                
+                self.canSendLocation = false
+            }
+        }
+    }
+    
+    
+    func composeMessage(type: MessageType, content: Any, userID: String)  {
+        let message = Message.init(type: type, content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false)
+        Message.send(message: message, toID: userID, completion: {(_) in
+        })
+    }
+    
+    func checkLocationPermission() -> Bool {
+        var state = false
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            state = true
+        case .authorizedAlways:
+            state = true
+        default: break
+        }
+        return state
     }
 
 

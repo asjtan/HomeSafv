@@ -177,7 +177,6 @@
 				TargetAttributes = {
 					887973841EAF64230005D444 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = 65555YK7TP;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -403,7 +402,7 @@
 			baseConfigurationReference = 569B47CB0712604851F8C3F2 /* Pods-HomeSafv.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 65555YK7TP;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HomeSafv/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nus.ios.HomeSafv;
@@ -417,7 +416,7 @@
 			baseConfigurationReference = F1236959D934798344A0D0F7 /* Pods-HomeSafv.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 65555YK7TP;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HomeSafv/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nus.ios.HomeSafv;
