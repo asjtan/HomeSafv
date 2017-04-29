@@ -25,6 +25,7 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
     var topAnchorContraint: NSLayoutConstraint!
     let darkView = UIView.init()
     var items = [User]()
+    @IBOutlet weak var qrCodeImg: UIImageView!
 
     func customization() {
         self.view.addSubview(self.darkView)
@@ -189,6 +190,11 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         }
     }
     
+    @IBAction func scanQrCode(_ sender: Any) {
+        
+    }
+    
+    
     @IBAction func closeView(_ sender: Any) {
         self.dismissExtraViews()
     }
@@ -199,6 +205,39 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
                 self.dismiss(animated: true, completion: nil)
             }
         }
+    }
+    
+
+    @IBAction func genQrCode(_ sender: Any) {
+        let img = generateQRCode(from: emailLbl.text!)
+
+        profileView.bringSubview(toFront: qrCodeImg)
+        //profilePic.bringSubview(toFront: qrCodeImg)
+        qrCodeImg.image = img
+    }
+    
+    func generateQRCode(from string: String) -> UIImage? {
+        let data = string.data(using: String.Encoding.isoLatin1)
+        
+        if let filter = CIFilter(name: "CIQRCodeGenerator") {
+            
+            filter.setValue(data, forKey: "inputMessage")
+            filter.setValue("M", forKey: "inputCorrectionLevel")
+            
+            guard let qrCodeImg = filter.outputImage else {return nil}
+            let scaleX = profilePic.frame.size.width / qrCodeImg.extent.size.width
+            let scaleY = profilePic.frame.size.height / qrCodeImg.extent.size.height
+            
+            
+            let transform = CGAffineTransform(scaleX: scaleX, y:scaleY)  //(scaleX: 100, y: 100)
+            
+            
+            if let output = filter.outputImage?.applying(transform) {
+                return UIImage(ciImage: output)
+            }
+        }
+        
+        return nil
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
