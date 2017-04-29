@@ -13,6 +13,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     
+    var qrcode: String?
+    var qrCode: String? {
+        get {
+            return qrcode
+        }
+    }    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -100,6 +108,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     func found(code: String) {
+        
+        qrcode = code
         print(code)
     }
     

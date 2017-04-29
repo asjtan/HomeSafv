@@ -94,6 +94,8 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         self.fetchUsers()
         self.fetchUserInfo()
         
+        profileView.bringSubview(toFront: qrCodeImg)
+        qrCodeImg.image = generateQRCode(from: emailLbl.text!)
     }
     
     func dismissExtraViews() {
@@ -205,15 +207,6 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
                 self.dismiss(animated: true, completion: nil)
             }
         }
-    }
-    
-
-    @IBAction func genQrCode(_ sender: Any) {
-        let img = generateQRCode(from: emailLbl.text!)
-
-        profileView.bringSubview(toFront: qrCodeImg)
-        //profilePic.bringSubview(toFront: qrCodeImg)
-        qrCodeImg.image = img
     }
     
     func generateQRCode(from string: String) -> UIImage? {
