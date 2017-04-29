@@ -23,6 +23,7 @@
 		887973B11EAF9CF20005D444 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 887973B01EAF9CF20005D444 /* GoogleService-Info.plist */; };
 		887973B31EB3B0030005D444 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887973B21EB3B0030005D444 /* ConversationVC.swift */; };
 		887973B51EB3B4C20005D444 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887973B41EB3B4C20005D444 /* ChatVC.swift */; };
+		BF0B2C721EB43B1400C397A2 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0B2C701EB43B1400C397A2 /* ScannerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		887973B01EAF9CF20005D444 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		887973B21EB3B0030005D444 /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		887973B41EB3B4C20005D444 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		BF0B2C701EB43B1400C397A2 /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		F1236959D934798344A0D0F7 /* Pods-HomeSafv.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeSafv.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeSafv/Pods-HomeSafv.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 		8879739D1EAF6A550005D444 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BF0B2C701EB43B1400C397A2 /* ScannerViewController.swift */,
 				8879738A1EAF64240005D444 /* LoginVC.swift */,
 				887973AC1EAF93B40005D444 /* MainVC.swift */,
 				887973B21EB3B0030005D444 /* ConversationVC.swift */,
@@ -274,6 +277,7 @@
 				887973B51EB3B4C20005D444 /* ChatVC.swift in Sources */,
 				887973891EAF64240005D444 /* AppDelegate.swift in Sources */,
 				887973A31EAF88050005D444 /* Generic.swift in Sources */,
+				BF0B2C721EB43B1400C397A2 /* ScannerViewController.swift in Sources */,
 				887973B31EB3B0030005D444 /* ConversationVC.swift in Sources */,
 				887973AF1EAF97F10005D444 /* CellObjects.swift in Sources */,
 				887973AD1EAF93B40005D444 /* MainVC.swift in Sources */,
