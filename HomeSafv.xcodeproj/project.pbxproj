@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F028252B10663F8A412C162 /* Pods_HomeSafv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D6C1D94C243B330B9D390E0 /* Pods_HomeSafv.framework */; };
+		881C363B1EB76FBD0061B28C /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881C363A1EB76FBD0061B28C /* LandingVC.swift */; };
 		887973891EAF64240005D444 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887973881EAF64240005D444 /* AppDelegate.swift */; };
 		8879738B1EAF64240005D444 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879738A1EAF64240005D444 /* LoginVC.swift */; };
 		8879738E1EAF64240005D444 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8879738C1EAF64240005D444 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		569B47CB0712604851F8C3F2 /* Pods-HomeSafv.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeSafv.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeSafv/Pods-HomeSafv.debug.xcconfig"; sourceTree = "<group>"; };
 		5D6C1D94C243B330B9D390E0 /* Pods_HomeSafv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeSafv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		881C363A1EB76FBD0061B28C /* LandingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingVC.swift; sourceTree = "<group>"; };
 		887973851EAF64230005D444 /* HomeSafv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeSafv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		887973881EAF64240005D444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8879738A1EAF64240005D444 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				887973AC1EAF93B40005D444 /* MainVC.swift */,
 				887973B21EB3B0030005D444 /* ConversationVC.swift */,
 				887973B41EB3B4C20005D444 /* ChatVC.swift */,
+				881C363A1EB76FBD0061B28C /* LandingVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				887973A51EAF90910005D444 /* User.swift in Sources */,
 				8879738B1EAF64240005D444 /* LoginVC.swift in Sources */,
 				887973A71EAF90D80005D444 /* Message.swift in Sources */,
+				881C363B1EB76FBD0061B28C /* LandingVC.swift in Sources */,
 				887973B51EB3B4C20005D444 /* ChatVC.swift in Sources */,
 				887973891EAF64240005D444 /* AppDelegate.swift in Sources */,
 				887973A31EAF88050005D444 /* Generic.swift in Sources */,
