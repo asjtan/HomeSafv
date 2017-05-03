@@ -309,6 +309,8 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         let name = arr[0]
         let email = arr[1]
         
-        User.addContact(userEmail: emailLbl.text!, contactName: name, contactEmail: email)
+        User.addContact(userEmail: emailLbl.text!, contactName: name, contactEmail: email, completion: {(_) in
+        })
+
     }
 }
