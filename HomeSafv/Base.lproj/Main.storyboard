@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AJB-If-mb9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AJB-If-mb9">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -897,9 +897,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="387" height="322"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d5o-0J-UzX">
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d5o-0J-UzX">
                             <rect key="frame" x="0.0" y="0.0" width="387" height="242"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bEv-38-7xb">
                                 <size key="itemSize" width="287" height="271"/>
@@ -946,7 +945,7 @@
                                     </connections>
                                 </collectionViewCell>
                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Empty Cell" id="3FP-pA-YI6" customClass="ContactsCVCell" customModule="HomeSafv" customModuleProvider="target">
-                                    <rect key="frame" x="130" y="6.666666666666667" width="119" height="110"/>
+                                    <rect key="frame" x="130" y="6.5" width="119" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                         <rect key="frame" x="0.0" y="0.0" width="119" height="110"/>
@@ -1006,8 +1005,12 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="8Rn-cw-Vgu" secondAttribute="bottom" constant="20" id="2xM-hn-ai4"/>
+                        <constraint firstAttribute="trailing" secondItem="d5o-0J-UzX" secondAttribute="trailing" id="7Ca-SO-Zwo"/>
                         <constraint firstItem="qQc-iN-Ig9" firstAttribute="leading" secondItem="ujT-MK-7J8" secondAttribute="leading" constant="20" id="E8I-vQ-J7v"/>
+                        <constraint firstItem="d5o-0J-UzX" firstAttribute="top" secondItem="ujT-MK-7J8" secondAttribute="top" id="dmK-L7-diL"/>
                         <constraint firstAttribute="bottom" secondItem="qQc-iN-Ig9" secondAttribute="bottom" constant="20" id="gw5-LS-20m"/>
+                        <constraint firstItem="d5o-0J-UzX" firstAttribute="leading" secondItem="ujT-MK-7J8" secondAttribute="leading" id="kgt-iP-ePV"/>
+                        <constraint firstItem="8Rn-cw-Vgu" firstAttribute="top" secondItem="d5o-0J-UzX" secondAttribute="bottom" constant="20" id="pX9-fi-7Qk"/>
                         <constraint firstAttribute="trailing" secondItem="8Rn-cw-Vgu" secondAttribute="trailing" constant="20" id="uO1-F7-v4L"/>
                     </constraints>
                 </view>

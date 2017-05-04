@@ -103,7 +103,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             found(code: readableObject.stringValue);
         }
         
-        dismiss(animated: true)
+        //self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -113,9 +113,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             print("delegate not set")
             return
         }
-        //print(code)
         
         delegate.finishScan(controller: self, data: code)
+        //print(code)
     }
     
     override var prefersStatusBarHidden: Bool {

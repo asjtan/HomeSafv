@@ -357,6 +357,25 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         let name = arr[0]
         let email = arr[1]
         
-        User.addContact(contactName: name, contactEmail: email, completion: {(_) in})
+        User.addContact(contactName: name, contactEmail: email, completion: {(_) in
+            //controller.dismiss(animated: true, completion: nil)
+            
+            let alert=UIAlertController(title: "Contact Saved!",
+             message: "Contact has been saved", preferredStyle:
+             UIAlertControllerStyle.alert);
+             
+             let OKAction = UIAlertAction(title: "OK", style: .default) {
+             (action:UIAlertAction!) in
+                //controller.dismiss(animated: false, completion: nil)
+                self.dismissExtraViews()
+                _ = controller.navigationController?.popViewController(animated: true)
+             }
+             alert.addAction(OKAction)
+             self.present(alert, animated: true, completion: nil);
+            
+        })
+        
+        
+
     }
 }
