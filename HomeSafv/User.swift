@@ -101,29 +101,9 @@ class User: NSObject {
         })
     }
     
-    class func addContact(userEmail: String, contactName: String, contactEmail: String, completion: @escaping (Bool) -> Swift.Void) {
-        if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
-            FIRDatabase.database().reference().child("users").child(currentUserID).child("contacts").child(contactName).observeSingleEvent(of: .value, with: { (snapshot) in
-                if snapshot.exists() {
-                    let data = snapshot.value as! [String: String]
-                    let location = data["location"]!
-                    FIRDatabase.database().reference().child("contacts").child(location).childByAutoId().setValue(["name": contactName, "email": contactEmail], withCompletionBlock: { (error, _) in
-                        if error == nil {
-                            completion(true)
-                        } else {
-                            completion(false)
-                        }
-                    })
-                } else {
-                    FIRDatabase.database().reference().child("contacts").childByAutoId().childByAutoId().setValue(["name": contactName, "email": contactEmail], withCompletionBlock: { (error, reference) in
-                        /*let data = ["location": reference.parent!.key]
-                         FIRDatabase.database().reference().child("users").child(currentUserID).child("conversations").child(toID).updateChildValues(data)
-                         FIRDatabase.database().reference().child("users").child(toID).child("conversations").child(currentUserID).updateChildValues(data)*/
-                        completion(true)
-                    })
-                }
-            })
-        }
+    class func addContact(userEmail: String, contactName: String, contactEmail: String){
+        // currently as the users in databse
+        // to be improved: add contacts table for user
     }
 
     

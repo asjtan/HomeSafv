@@ -23,7 +23,7 @@ class Conversation: NSObject {
                     let values = snapshot.value as! [String: String]
                     let location = values["location"]!
                     User.info(forUserID: fromID, completion: { (user) in
-                        let emptyMessage = Message.init(type: .text, content: "loading", owner: .sender, timestamp: 0, isRead: true)
+                        let emptyMessage = Message.init(type: .text, content: "loading", owner: .sender, timestamp: 0, isRead: true, locsession: "", locsesscount: "")
                         let conversation = Conversation.init(user: user, lastMessage: emptyMessage)
                         conversations.append(conversation)
                         conversation.lastMessage.downloadLastMessage(forLocation: location, completion: { (_) in

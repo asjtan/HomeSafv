@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import MapKit
 
-class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, ScannerViewControllerDelegate {
+class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, ScannerViewControllerDelegate, MKMapViewDelegate {
     @IBOutlet var contactsView: UIView!
     @IBOutlet var mapView: UIView!
     @IBOutlet var previewView: UIView!
@@ -26,6 +26,7 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
     let darkView = UIView.init()
     var items = [User]()
     @IBOutlet weak var qrCodeImg: UIImageView!
+    
 
     func customization() {
         self.view.addSubview(self.darkView)
@@ -146,9 +147,56 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
                 annotation.coordinate = coordinate!
                 self.mapLocation.addAnnotation(annotation)
                 self.mapLocation.showAnnotations(self.mapLocation.annotations, animated: false)
+            case .maptrack:
+                // get the locations from the server and pump into an array desmond
+                self.mapView.isHidden = false
+                let messagesession  = notification.userInfo?["messagesession"] as! String
+                //use the session to pull out all lat and long from firebase
+                var llinfo = [String]()
+                let message = Message.init(type: .location, content: "", owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
+                if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
+                    message.getLatLong(sessionid: messagesession, toID:  currentUserID, completion: {(result) in
+                        llinfo = result as [String]
+                        var points: [CLLocationCoordinate2D] = [CLLocationCoordinate2D]()
+                        for llin in llinfo {
+                            let coorStr = String(llin)
+                            let coordinates = (coorStr!).components(separatedBy: ":")
+                            print (coordinates)
+                            let annotation = MKPointAnnotation()
+                            let location = CLLocationCoordinate2D.init(latitude: CLLocationDegrees(coordinates[0])!, longitude: CLLocationDegrees(coordinates[1])!)
+                            annotation.coordinate = location
+                            self.mapLocation.addAnnotation(annotation)
+                            let latDelta:CLLocationDegrees = 0.05
+                            let lonDelta:CLLocationDegrees = 0.05
+                            let span = MKCoordinateSpanMake(latDelta, lonDelta)
+                            let region = MKCoordinateRegionMake(location, span)
+                            self.mapLocation.setRegion(region, animated: false)
+                            points.append(annotation.coordinate)
+                            if !llinfo.isEmpty
+                            {
+                                self.mapLocation.delegate = self
+                                
+                                print (points.count)
+                                print (points)
+                                let geodesic = MKGeodesicPolyline(coordinates: points, count: points.count)
+                                self.mapLocation.add(geodesic)
+                                
+                            }
+                        }
+                    })
+                }
             }
         }
     }
+    
+        
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor.purple
+            renderer.lineWidth = 4.0
+            
+            return renderer
+        }
     
     func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
         var zoomRect = CGRect.zero
@@ -309,8 +357,6 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         let name = arr[0]
         let email = arr[1]
         
-        User.addContact(userEmail: emailLbl.text!, contactName: name, contactEmail: email, completion: {(_) in
-        })
-
+        User.addContact(userEmail: emailLbl.text!, contactName: name, contactEmail: email)
     }
 }

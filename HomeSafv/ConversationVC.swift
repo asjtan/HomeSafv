@@ -152,6 +152,9 @@ class ConversationVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 cell.messageLabel.text = message
             case .location:
                 cell.messageLabel.text = "Location"
+            //added by desmond location tableview
+            case .tracklocation:
+                cell.messageLabel.text = "TrackLocation"
             default:
                 cell.messageLabel.text = "Media"
             }
@@ -209,7 +212,7 @@ class ConversationVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let lastLocation = locations.last {
             if self.canSendLocation {
                 let coordinate = String(lastLocation.coordinate.latitude) + ":" + String(lastLocation.coordinate.longitude)
-                let message = Message.init(type: .location, content: coordinate, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false)
+                let message = Message.init(type: .location, content: coordinate, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
                 if let id = FIRAuth.auth()?.currentUser?.uid
                 {
                     User.downloadAllUsers(exceptID: id, completion: {(user) in
@@ -224,7 +227,7 @@ class ConversationVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func composeMessage(type: MessageType, content: Any, userID: String)  {
-        let message = Message.init(type: type, content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false)
+        let message = Message.init(type: type, content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
         Message.send(message: message, toID: userID, completion: {(_) in
         })
     }

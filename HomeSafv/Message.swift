@@ -17,8 +17,11 @@ class Message: NSObject {
     var timestamp: Int
     var isRead: Bool
     var image: UIImage?
+    var locsession: String
+    var locsesscount: String
     private var toID: String?
     private var fromID: String?
+    var LLarray: Array<Any>
     
     class func downloadAllMessages(forUserID: String, completion: @escaping (Message) -> Swift.Void) {
         if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
@@ -26,9 +29,20 @@ class Message: NSObject {
                 if snapshot.exists() {
                     let data = snapshot.value as! [String: String]
                     let location = data["location"]!
+                    
+                    //lookhere desmond observe method
                     FIRDatabase.database().reference().child("conversations").child(location).observe(.childAdded, with: { (snap) in
                         if snap.exists() {
+                            //logic here to consolidate track location session into 1 message
                             let receivedMessage = snap.value as! [String: Any]
+                            var locses = ""
+                            var loccnt = ""
+                            if((snap.hasChild("locsession")) && (snap.hasChild("locCount")))
+                            {
+                                locses = receivedMessage["locsession"] as! String
+                                loccnt = receivedMessage["locCount"] as! String
+                            }
+                            
                             let messageType = receivedMessage["type"] as! String
                             var type = MessageType.text
                             switch messageType {
@@ -36,17 +50,40 @@ class Message: NSObject {
                                 type = .photo
                             case "location":
                                 type = .location
+                            case "tracking":
+                                type = .tracklocation
                             default: break
                             }
-                            let content = receivedMessage["content"] as! String
-                            let fromID = receivedMessage["fromID"] as! String
-                            let timestamp = receivedMessage["timestamp"] as! Int
-                            if fromID == currentUserID {
-                                let message = Message.init(type: type, content: content, owner: .receiver, timestamp: timestamp, isRead: true)
-                                completion(message)
-                            } else {
-                                let message = Message.init(type: type, content: content, owner: .sender, timestamp: timestamp, isRead: true)
-                                completion(message)
+                            //display the messages out
+                            if messageType == "tracking"
+                            {
+                                if loccnt == "0"{
+                                    // handle how to display the consolidated message only on 0
+                                    //add the session here too
+                                    print("locses | " + locses)
+                                    let content = receivedMessage["content"] as! String
+                                    let fromID = receivedMessage["fromID"] as! String
+                                    let timestamp = receivedMessage["timestamp"] as! Int
+                                    if fromID == currentUserID {
+                                        let message = Message.init(type: type, content: content, owner: .receiver, timestamp: timestamp, isRead: true, locsession: locses, locsesscount: loccnt)
+                                        completion(message)
+                                    } else {
+                                        let message = Message.init(type: type, content: content, owner: .sender, timestamp: timestamp, isRead: true, locsession: locses, locsesscount: loccnt)
+                                        completion(message)
+                                    }
+                                }
+                            }
+                            else{
+                                let content = receivedMessage["content"] as! String
+                                let fromID = receivedMessage["fromID"] as! String
+                                let timestamp = receivedMessage["timestamp"] as! Int
+                                if fromID == currentUserID {
+                                    let message = Message.init(type: type, content: content, owner: .receiver, timestamp: timestamp, isRead: true, locsession: "", locsesscount: "")
+                                    completion(message)
+                                } else {
+                                    let message = Message.init(type: type, content: content, owner: .sender, timestamp: timestamp, isRead: true, locsession: "", locsesscount: "")
+                                    completion(message)
+                                }
                             }
                         }
                     })
@@ -95,12 +132,14 @@ class Message: NSObject {
             FIRDatabase.database().reference().child("conversations").child(forLocation).observe(.value, with: { (snapshot) in
                 if snapshot.exists() {
                     for snap in snapshot.children {
+                        // print("entered download last messages - snap exists")
                         let receivedMessage = (snap as! FIRDataSnapshot).value as! [String: Any]
                         self.content = receivedMessage["content"]!
                         self.timestamp = receivedMessage["timestamp"] as! Int
                         let messageType = receivedMessage["type"] as! String
                         let fromID = receivedMessage["fromID"] as! String
                         self.isRead = receivedMessage["isRead"] as! Bool
+                        
                         var type = MessageType.text
                         switch messageType {
                         case "text":
@@ -109,6 +148,8 @@ class Message: NSObject {
                             type = .photo
                         case "location":
                             type = .location
+                        case "tracking":
+                            type = .tracklocation
                         default: break
                         }
                         self.type = type
@@ -127,9 +168,14 @@ class Message: NSObject {
     class func send(message: Message, toID: String, completion: @escaping (Bool) -> Swift.Void)  {
         if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
             switch message.type {
+            case .tracklocation:
+                let values = ["type": "tracking", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp, "isRead": false]
+                Message.uploadMessage(withValues: values, toID: toID, completion: { (status) in
+                    completion(status)
+                })
             case .location:
                 let values = ["type": "location", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp, "isRead": false]
-                Message.uploadMessage(withValues: values, toID: toID, completion: { (status) in
+                Message.uploadMessage(withValues: values, toID: toID  , completion: { (status) in
                     completion(status)
                 })
             case .photo:
@@ -152,6 +198,77 @@ class Message: NSObject {
             }
         }
     }
+    //added by desmond send loc
+    class func sendLoc(message:Message, toID: String, completion: @escaping(Bool)-> Swift.Void, conSwitch: Bool, sessionID: String, locCounter: Int){
+        let counter = String(locCounter)
+        if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
+            if conSwitch == true
+            {
+                // let locsession = ("\(currentUserID)\(counter)")
+                
+                let values = ["type": "tracking", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp, "locsession":  sessionID, "locCount": counter, "isRead": false]
+                //fire the values and send to database
+                print("fromID: \(currentUserID) | content \(message.content)")
+                //TODO add to database
+                Message.uploadConstLocMessage(withValues: values, toID: toID, completion: { (status) in
+                    completion(status)
+                })
+            }
+        }
+        
+    }
+    
+    class func uploadConstLocMessage(withValues: [String: Any], toID: String, completion: @escaping (Bool) -> Swift.Void) {
+        if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
+            //desmond snapshot is if the data already exist in the database
+            FIRDatabase.database().reference().child("users").child(currentUserID).child("conversations").child(toID).observeSingleEvent(of: .value, with: { (snapshot) in
+                if snapshot.exists() {
+                    let data = snapshot.value as! [String: String]
+                    let location = data["location"]!
+                    FIRDatabase.database().reference().child("conversations").child(location).childByAutoId().setValue(withValues, withCompletionBlock: { (error, _) in
+                        if error == nil {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
+                    })
+                } else {
+                    FIRDatabase.database().reference().child("conversations").childByAutoId().childByAutoId().setValue(withValues, withCompletionBlock: { (error, reference) in
+                        let data = ["location": reference.parent!.key]
+                        FIRDatabase.database().reference().child("users").child(currentUserID).child("conversations").child(toID).updateChildValues(data)
+                        FIRDatabase.database().reference().child("users").child(toID).child("conversations").child(currentUserID).updateChildValues(data)
+                        completion(true)
+                    })
+                }
+            })
+        }
+    }
+    
+    class func settrackstatus(switcher: Bool, toID: String, sessionid: String, currsessID: String)
+    {
+        var flag = "start"
+        if switcher == false{
+            flag = "stop"
+        }
+        if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
+            //desmond snapshot is if the data already exist in the database
+            FIRDatabase.database().reference().child("tracksession").child(sessionid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if snapshot.exists() {
+                    
+                    let data = snapshot.value as! [String: String]
+                    let currID = data["id"]
+                    let values = ["type" : "trackID", "fromID": currentUserID, "id": currID , "switch": flag, "session": currsessID]
+                    FIRDatabase.database().reference().child("tracksession").child(currsessID).childByAutoId().setValue(values)
+                    
+                }
+                else{
+                    let values = ["type" : "trackID", "fromID": currentUserID, "id": toID , "switch": flag, "session" : sessionid]
+                    FIRDatabase.database().reference().child("tracksession").child(sessionid).childByAutoId().setValue(values)
+                }
+            })
+        }
+    }
+    
     
     class func uploadMessage(withValues: [String: Any], toID: String, completion: @escaping (Bool) -> Swift.Void) {
         if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
@@ -178,11 +295,58 @@ class Message: NSObject {
         }
     }
     
-    init(type: MessageType, content: Any, owner: MessageOwner, timestamp: Int, isRead: Bool) {
+    func getLatLong(sessionid: String, toID: String, completion: @escaping (_ result: [String]) -> ()){
+        
+        var LLarray = [String]()
+        var locsession = ""
+        if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
+            FIRDatabase.database().reference().child("users").child(currentUserID).child("conversations").observe(.childAdded, with: { (snapshot) in
+                if snapshot.exists() {
+                    // let fromID = snapshot.key
+                    let values = snapshot.value as! [String: String]
+                    let location = values["location"]!
+                    
+                    
+                    FIRDatabase.database().reference().child("conversations").child(location).observe(.value, with: { (snapshot) in
+                        if snapshot.exists() {
+                            for snap in snapshot.children {
+                                // print("entered get lat long - snap exists")
+                                let receivedMessage = (snap as! FIRDataSnapshot).value as! [String: Any]
+                                if (snap as! FIRDataSnapshot).hasChild("locsession")
+                                {
+                                    locsession = receivedMessage["locsession"] as! String
+                                    //  print("locsession" + locsession )
+                                }
+                                let content = receivedMessage["content"] as! String
+                                let type = receivedMessage["type"] as! String
+                                //print("sessionid" + sessionid + " |  sessions: " + locsession)
+                                if (sessionid == locsession) && (type == "tracking")
+                                {
+                                    LLarray.append(content)
+                                    //let size = LLarray.count
+                                    //print ("inside" + String(size))
+                                    // print("sessions" + locsession + " |  content: " + content)
+                                }
+                            }
+                            completion(LLarray)
+                        }
+                    })
+                    
+                }
+            })
+        }
+    }
+    
+    
+    //MARK: Inits
+    init(type: MessageType, content: Any, owner: MessageOwner, timestamp: Int, isRead: Bool, locsession: String, locsesscount: String) {
         self.type = type
         self.content = content
         self.owner = owner
         self.timestamp = timestamp
         self.isRead = isRead
+        self.locsession = locsession
+        self.locsesscount = locsesscount
+        self.LLarray = [String]()
     }
 }

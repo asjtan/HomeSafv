@@ -58,12 +58,14 @@ enum ShowExtraView {
     case profile
     case preview
     case map
+    case maptrack
 }
 
 enum MessageType {
     case photo
     case text
     case location
+    case tracklocation
 }
 
 enum MessageOwner {
