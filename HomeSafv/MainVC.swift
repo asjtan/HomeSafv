@@ -366,7 +366,6 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
              
              let OKAction = UIAlertAction(title: "OK", style: .default) {
              (action:UIAlertAction!) in
-                //controller.dismiss(animated: false, completion: nil)
                 self.dismissExtraViews()
                 _ = controller.navigationController?.popViewController(animated: true)
              }
