@@ -80,7 +80,8 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     // start track session desmond
     func setTrackSession(countswitch: Bool, sessionID: String, currsessionID: String)
     {
-        Message.settrackstatus(switcher: countswitch, toID: self.currentUser!.id, sessionid: sessionID, currsessID: currsessionid )
+        Message.settrackstatus(switcher: countswitch, toID: self.currentUser!.id, sessionid: sessionID, currsessID: currsessionid, completion: {(_) in
+        })
     }
     
     

@@ -244,7 +244,7 @@ class Message: NSObject {
         }
     }
     
-    class func settrackstatus(switcher: Bool, toID: String, sessionid: String, currsessID: String)
+    class func settrackstatus(switcher: Bool, toID: String, sessionid: String, currsessID: String, completion: @escaping (Bool) -> Swift.Void)
     {
         var flag = "start"
         if switcher == false{
@@ -252,18 +252,28 @@ class Message: NSObject {
         }
         if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
             //desmond snapshot is if the data already exist in the database
-            FIRDatabase.database().reference().child("tracksession").child(sessionid).observeSingleEvent(of: .value, with: { (snapshot) in
+            FIRDatabase.database().reference().child("users").child(currentUserID).child("tracksession").child(toID).observeSingleEvent(of: .value, with: { (snapshot) in
                 if snapshot.exists() {
                     
                     let data = snapshot.value as! [String: String]
                     let currID = data["id"]
                     let values = ["type" : "trackID", "fromID": currentUserID, "id": currID , "switch": flag, "session": currsessID]
-                    FIRDatabase.database().reference().child("tracksession").child(currsessID).childByAutoId().setValue(values)
-                    
+                    FIRDatabase.database().reference().child("tracksession").child(sessionid).childByAutoId().setValue(values, withCompletionBlock: { (error, _) in
+                        if error == nil {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
+                    })
                 }
                 else{
+                    
                     let values = ["type" : "trackID", "fromID": currentUserID, "id": toID , "switch": flag, "session" : sessionid]
-                    FIRDatabase.database().reference().child("tracksession").child(sessionid).childByAutoId().setValue(values)
+                    FIRDatabase.database().reference().child("tracksession").child(sessionid).childByAutoId().setValue(values, withCompletionBlock: { (error, reference)
+                        in
+                        FIRDatabase.database().reference().child("users").child(currentUserID).child("tracksession").child(toID).updateChildValues(values)
+                        completion(true)
+                    })
                 }
             })
         }
