@@ -96,7 +96,6 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         self.fetchUserInfo()
         
         profileView.bringSubview(toFront: qrCodeImg)
-        qrCodeImg.image = generateQRCode(from:  nameLbl.text! + "|" + emailLbl.text!)
     }
     
     func dismissExtraViews() {
@@ -227,6 +226,7 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
                     weakSelf?.emailLbl.text = user.email
                     weakSelf?.profilePic.image = user.profilePic
                     weakSelf = nil
+                    self.qrCodeImg.image = self.generateQRCode(from:  user.name + "|" + user.email)
                 }
             })
         }
@@ -357,6 +357,6 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         let name = arr[0]
         let email = arr[1]
         
-        User.addContact(userEmail: emailLbl.text!, contactName: name, contactEmail: email)
+        User.addContact(contactName: name, contactEmail: email, completion: {(_) in})
     }
 }
