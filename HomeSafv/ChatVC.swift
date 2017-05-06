@@ -337,6 +337,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                     var counter = 0
                     while self.conSwitch == true
                     {
+                        self.locationManager.startUpdatingLocation()
                         let coordinate = String(lastLocation.coordinate.latitude) + ":" + String(lastLocation.coordinate.longitude)
                         let message = Message.init(type: .location, content: coordinate, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
                         // print("conSendLocation : \(self.conSendLocation)")
@@ -344,7 +345,8 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                         //this is to send the message to display in the chat
                         Message.sendLoc(message: message, toID: self.currentUser!.id, completion: {(_) in
                         }, conSwitch: self.conSwitch , sessionID: self.sessionid, locCounter: counter)
-                        sleep(4)
+                        sleep(30)
+                        self.locationManager.stopUpdatingLocation()
                         counter += 1
                     }
                 }
