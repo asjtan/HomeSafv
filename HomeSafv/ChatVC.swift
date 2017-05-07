@@ -2,7 +2,7 @@
 //  ChatVC.swift
 //  HomeSafv
 //
-//  Created by Alex Tan on 29/4/17.
+//  Created by Alex Tan, Desmond, Yanling, Lei Jun on 29/4/17.
 //  Copyright © 2017 SG4207. All rights reserved.
 //
 

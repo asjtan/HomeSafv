@@ -2,7 +2,7 @@
 //  LandingVC.swift
 //  HomeSafv
 //
-//  Created by Alex Tan on 1/5/17.
+//  Created by Alex Tan, Desmond, Yanling, Lei Jun on 1/5/17.
 //  Copyright © 2017 SG4207. All rights reserved.
 //
 

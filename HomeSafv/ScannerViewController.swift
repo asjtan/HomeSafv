@@ -2,7 +2,7 @@
 //  ScannerViewController.swift
 //  Qrcode
 //
-//  Created by jun on 4/22/17.
+//  Created by Alex Tan, Desmond, Yanling, Lei Jun on 4/22/17.
 //  Copyright © 2017 jun. All rights reserved.
 //
 
