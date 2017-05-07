@@ -300,6 +300,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             let messagesession = self.items[indexPath.row].locsession
             let info = ["viewType" : ShowExtraView.maptrack, "messagesession": messagesession] as [String : Any]
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
+            self.inputAccessoryView?.isHidden = true
         default: break
         }
     }

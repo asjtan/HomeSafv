@@ -156,7 +156,7 @@
                                 <action selector="register:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EbQ-Jf-1JY"/>
                             </connections>
                         </button>
-                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrong input paramets, please try again" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9av-Ph-82n">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9av-Ph-82n">
                             <rect key="frame" x="33" y="354" width="264" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="5Ge-jd-Mk4"/>
@@ -322,7 +322,7 @@
                                 <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3ta-bU-H1E"/>
                             </connections>
                         </button>
-                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrong input paramets, please try again" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ll4-3c-wUt">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ll4-3c-wUt">
                             <rect key="frame" x="45" y="359" width="362" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="3Sd-qa-yLm"/>
@@ -889,6 +889,8 @@
                         <outlet property="profileView" destination="uNh-nM-rxs" id="3NK-kH-ILM"/>
                         <outlet property="qrCodeImg" destination="cSu-oF-ooh" id="iTC-RL-35K"/>
                         <outlet property="scrollView" destination="hqR-jt-J1Q" id="nuw-eN-sNK"/>
+                        <outlet property="trackLocation" destination="1Xa-nq-XJB" id="WrV-qB-qyl"/>
+                        <outlet property="trackView" destination="eNF-FY-T5j" id="8A6-U6-S5k"/>
                         <segue destination="aVH-i8-BeZ" kind="relationship" relationship="rootViewController" id="A0n-72-nlh"/>
                     </connections>
                 </navigationController>
@@ -945,7 +947,7 @@
                                     </connections>
                                 </collectionViewCell>
                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Empty Cell" id="3FP-pA-YI6" customClass="ContactsCVCell" customModule="HomeSafv" customModuleProvider="target">
-                                    <rect key="frame" x="130" y="6.666666666666667" width="119" height="110"/>
+                                    <rect key="frame" x="130" y="6.5" width="119" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                         <rect key="frame" x="0.0" y="0.0" width="119" height="110"/>
@@ -1041,6 +1043,35 @@
                         <constraint firstItem="89c-N2-MBt" firstAttribute="top" secondItem="b8T-S6-i6g" secondAttribute="top" constant="25" id="Lf6-36-HAH"/>
                         <constraint firstAttribute="trailing" secondItem="89c-N2-MBt" secondAttribute="trailing" constant="25" id="X30-aU-GeK"/>
                         <constraint firstAttribute="trailing" secondItem="HB9-FT-r4s" secondAttribute="trailing" id="mVA-CD-il4"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" id="eNF-FY-T5j">
+                    <rect key="frame" x="0.0" y="0.0" width="423" height="269"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xa-nq-XJB">
+                            <rect key="frame" x="0.0" y="0.0" width="423" height="269"/>
+                        </mapView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0t-IU-Hu2">
+                            <rect key="frame" x="373" y="25" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="P3N-oS-Y5B"/>
+                                <constraint firstAttribute="height" constant="25" id="nSZ-iE-Nzn"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="close"/>
+                            <connections>
+                                <action selector="closeView:" destination="AGC-2Q-dlk" eventType="touchUpInside" id="bJc-lj-jvY"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="1Xa-nq-XJB" secondAttribute="bottom" id="550-7M-int"/>
+                        <constraint firstItem="1Xa-nq-XJB" firstAttribute="top" secondItem="eNF-FY-T5j" secondAttribute="top" id="Xxa-kg-reR"/>
+                        <constraint firstItem="E0t-IU-Hu2" firstAttribute="top" secondItem="eNF-FY-T5j" secondAttribute="top" constant="25" id="YPj-Bd-c1f"/>
+                        <constraint firstAttribute="trailing" secondItem="1Xa-nq-XJB" secondAttribute="trailing" id="knE-yS-U6E"/>
+                        <constraint firstItem="1Xa-nq-XJB" firstAttribute="leading" secondItem="eNF-FY-T5j" secondAttribute="leading" id="lnS-57-mf0"/>
+                        <constraint firstAttribute="trailing" secondItem="E0t-IU-Hu2" secondAttribute="trailing" constant="25" id="lzA-Nq-c0X"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" id="V4g-Wi-ASx">

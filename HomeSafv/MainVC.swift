@@ -13,9 +13,11 @@ import MapKit
 class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, ScannerViewControllerDelegate, MKMapViewDelegate {
     @IBOutlet var contactsView: UIView!
     @IBOutlet var mapView: UIView!
+    @IBOutlet var trackView: UIView!
     @IBOutlet var previewView: UIView!
     @IBOutlet var profileView: UIView!
     @IBOutlet weak var mapLocation: MKMapView!
+    @IBOutlet weak var trackLocation: MKMapView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -91,6 +93,14 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         self.mapView.trailingAnchor.constraint(equalTo: extraViewsContainer.trailingAnchor).isActive = true
         self.mapView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
         
+        extraViewsContainer.addSubview(self.trackView)
+        self.trackView.isHidden = true
+        self.trackView.translatesAutoresizingMaskIntoConstraints = false
+        self.trackView.leadingAnchor.constraint(equalTo: extraViewsContainer.leadingAnchor).isActive = true
+        self.trackView.topAnchor.constraint(equalTo: extraViewsContainer.topAnchor).isActive = true
+        self.trackView.trailingAnchor.constraint(equalTo: extraViewsContainer.trailingAnchor).isActive = true
+        self.trackView.bottomAnchor.constraint(equalTo: extraViewsContainer.bottomAnchor).isActive = true
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.showExtraViews(notification:)), name: NSNotification.Name(rawValue: "showExtraView"), object: nil)
         self.fetchUsers()
         self.fetchUserInfo()
@@ -110,7 +120,9 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
             self.contactsView.isHidden = true
             self.previewView.isHidden = true
             self.mapView.isHidden = true
+            self.trackView.isHidden = true
             self.mapLocation.removeAnnotations(self.mapLocation.annotations)
+            self.trackLocation.removeAnnotations(self.trackLocation.annotations)
             let vc = self.viewControllers.last
             vc?.inputAccessoryView?.isHidden = false
         })
@@ -148,7 +160,7 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
                 self.mapLocation.showAnnotations(self.mapLocation.annotations, animated: false)
             case .maptrack:
                 // get the locations from the server and pump into an array desmond
-                self.mapView.isHidden = false
+                self.trackView.isHidden = false
                 let messagesession  = notification.userInfo?["messagesession"] as! String
                 //use the session to pull out all lat and long from firebase
                 var llinfo = [String]()
@@ -164,21 +176,21 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
                             let annotation = MKPointAnnotation()
                             let location = CLLocationCoordinate2D.init(latitude: CLLocationDegrees(coordinates[0])!, longitude: CLLocationDegrees(coordinates[1])!)
                             annotation.coordinate = location
-                            self.mapLocation.addAnnotation(annotation)
+                            self.trackLocation.addAnnotation(annotation)
                             let latDelta:CLLocationDegrees = 0.05
                             let lonDelta:CLLocationDegrees = 0.05
                             let span = MKCoordinateSpanMake(latDelta, lonDelta)
                             let region = MKCoordinateRegionMake(location, span)
-                            self.mapLocation.setRegion(region, animated: false)
+                            self.trackLocation.setRegion(region, animated: false)
                             points.append(annotation.coordinate)
                             if !llinfo.isEmpty
                             {
-                                self.mapLocation.delegate = self
+                                self.trackLocation.delegate = self
                                 
                                 print (points.count)
                                 print (points)
                                 let geodesic = MKGeodesicPolyline(coordinates: points, count: points.count)
-                                self.mapLocation.add(geodesic)
+                                self.trackLocation.add(geodesic)
                                 
                             }
                         }
@@ -189,13 +201,13 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
     }
     
         
-        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = UIColor.purple
-            renderer.lineWidth = 4.0
-            
-            return renderer
-        }
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.purple
+        renderer.lineWidth = 4.0
+        
+        return renderer
+    }
     
     func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
         var zoomRect = CGRect.zero
