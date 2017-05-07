@@ -322,14 +322,6 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let lastLocation = locations.last {
-            self.locationManager.stopUpdatingLocation()
-            if self.canSendLocation {
-                let coordinate = String(lastLocation.coordinate.latitude) + ":" + String(lastLocation.coordinate.longitude)
-                let message = Message.init(type: .location, content: coordinate, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
-                Message.send(message: message, toID: self.currentUser!.id, completion: {(_) in
-                })
-                self.canSendLocation = false
-            }
             //added by desmond
             if self.conSendLocation {
                 // desmond here to keep sending the coordinates to the server
@@ -337,21 +329,28 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                     var counter = 0
                     while self.conSwitch == true
                     {
-                        self.locationManager.startUpdatingLocation()
                         let coordinate = String(lastLocation.coordinate.latitude) + ":" + String(lastLocation.coordinate.longitude)
                         let message = Message.init(type: .location, content: coordinate, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
-                        // print("conSendLocation : \(self.conSendLocation)")
-                        //print("conSwitch : \(self.conSwitch)")
+                        print("conSendLocation : \(self.conSendLocation)")
+                        print("conSwitch : \(self.conSwitch)")
                         //this is to send the message to display in the chat
                         Message.sendLoc(message: message, toID: self.currentUser!.id, completion: {(_) in
                         }, conSwitch: self.conSwitch , sessionID: self.sessionid, locCounter: counter)
                         sleep(30)
-                        self.locationManager.stopUpdatingLocation()
                         counter += 1
                     }
+                    self.locationManager.stopUpdatingLocation()
                 }
                 self.conSendLocation = false
-                self.canSendLocation = false
+            } else {
+                self.locationManager.stopUpdatingLocation()
+                if self.canSendLocation {
+                    let coordinate = String(lastLocation.coordinate.latitude) + ":" + String(lastLocation.coordinate.longitude)
+                    let message = Message.init(type: .location, content: coordinate, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
+                    Message.send(message: message, toID: self.currentUser!.id, completion: {(_) in
+                    })
+                    self.canSendLocation = false
+                }
             }
         }
     }
