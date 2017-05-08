@@ -141,6 +141,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     
     @IBAction func selectLocation(_ sender: Any) {
         self.canSendLocation = true
+        self.conSendLocation = false
         self.animateExtraButtons(toHide: true)
         if self.checkLocationPermission() {
             self.locationManager.startUpdatingLocation()
