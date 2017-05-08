@@ -26,6 +26,8 @@
 	<string>Location will be used for to share with friends</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location will be used for to share with friends</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>location always usage</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photos will be used for setting profile picture or sending to friends</string>
 	<key>UILaunchStoryboardName</key>

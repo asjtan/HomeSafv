@@ -175,13 +175,13 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
                         for llin in llinfo {
                             let coorStr = String(llin)
                             let coordinates = (coorStr!).components(separatedBy: ":")
-                            print (coordinates)
+                            //print (coordinates)
                             let annotation = MKPointAnnotation()
                             let location = CLLocationCoordinate2D.init(latitude: CLLocationDegrees(coordinates[0])!, longitude: CLLocationDegrees(coordinates[1])!)
                             annotation.coordinate = location
-                            self.trackLocation.addAnnotation(annotation)
-                            let latDelta:CLLocationDegrees = 0.05
-                            let lonDelta:CLLocationDegrees = 0.05
+                            //self.trackLocation.addAnnotation(annotation)
+                            let latDelta:CLLocationDegrees = 0.08
+                            let lonDelta:CLLocationDegrees = 0.08
                             let span = MKCoordinateSpanMake(latDelta, lonDelta)
                             let region = MKCoordinateRegionMake(location, span)
                             self.trackLocation.setRegion(region, animated: false)
@@ -189,12 +189,10 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
                             if !llinfo.isEmpty
                             {
                                 self.trackLocation.delegate = self
-                                
-                                print (points.count)
-                                print (points)
+                                //print (points.count)
+                                //print (points)
                                 let geodesic = MKGeodesicPolyline(coordinates: points, count: points.count)
                                 self.trackLocation.add(geodesic)
-                                
                             }
                         }
                     })

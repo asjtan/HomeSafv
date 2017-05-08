@@ -28,6 +28,9 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         return true
     }
     let locationManager = CLLocationManager()
+    var tenSecTimer = Timer()
+    var counter = 0
+    var lastLocationMessage = Message.init(type: .location, content: "", owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
     var items = [Message]()
     let imagePicker = UIImagePickerController()
     let barHeight: CGFloat = 50
@@ -155,7 +158,10 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         {
             print("stop")
             self.conSwitch = false
+            self.conSendLocation = false
             self.setTrackSession(countswitch: conSwitch, sessionID: self.currsessionid, currentsessionID: self.currsessionid)
+            tenSecTimer.invalidate()
+            self.locationManager.stopUpdatingLocation()
         }
         else if self.conSwitch == false
         {
@@ -163,18 +169,21 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             self.conSwitch = true
             self.setTrackSession(countswitch: conSwitch, sessionID: self.sessionid, currentsessionID: self.sessionid)
             self.currsessionid = id
+            
+            tenSecTimer = Timer.scheduledTimer(timeInterval: 20,
+                 target:self,
+                 selector: (#selector(self.tenSecTimerFunction)),
+                 userInfo: nil, repeats: true)
+            
+            if self.checkLocationPermission() {
+                self.locationManager.startUpdatingLocation()
+                print("Entered the sendlocation")
+            } else {
+                print("Entered the sendlocation - else ")
+                self.locationManager.requestWhenInUseAuthorization()
+            }
         }
         self.animateExtraButtons(toHide: true)
-        //TODO desmond edit here to set switch to send location
-        if self.checkLocationPermission() {
-            
-            self.locationManager.startUpdatingLocation()
-            print("Entered the sendlocation")
-        } else {
-            print("Entered the sendlocation - else ")
-            self.locationManager.requestWhenInUseAuthorization()
-        }
-
     }
     
     @IBAction func showOptions(_ sender: Any) {
@@ -320,29 +329,27 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         picker.dismiss(animated: true, completion: nil)
     }
     
+    func tenSecTimerFunction(timer : Timer) {
+        print("conSendLocation : \(self.conSendLocation)")
+        print("conSwitch : \(self.conSwitch)")
+        let message = self.lastLocationMessage
+        Message.sendLoc(message: message, toID: self.currentUser!.id, completion: {(_) in
+        }, conSwitch: self.conSwitch , sessionID: self.sessionid, locCounter: counter)
+        counter += 1
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let lastLocation = locations.last {
-            //added by desmond
             if self.conSendLocation {
-                // desmond here to keep sending the coordinates to the server
-                DispatchQueue.global(qos: .background).async {
-                    var counter = 0
-                    while self.conSwitch == true
-                    {
-                        let coordinate = String(lastLocation.coordinate.latitude) + ":" + String(lastLocation.coordinate.longitude)
-                        let message = Message.init(type: .location, content: coordinate, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
-                        print("conSendLocation : \(self.conSendLocation)")
-                        print("conSwitch : \(self.conSwitch)")
-                        //this is to send the message to display in the chat
-                        Message.sendLoc(message: message, toID: self.currentUser!.id, completion: {(_) in
-                        }, conSwitch: self.conSwitch , sessionID: self.sessionid, locCounter: counter)
-                        sleep(30)
-                        counter += 1
-                    }
-                    self.locationManager.stopUpdatingLocation()
+                let coordinate = String(lastLocation.coordinate.latitude) + ":" + String(lastLocation.coordinate.longitude)
+                let message = Message.init(type: .location, content: coordinate, owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
+                self.lastLocationMessage = message
+                if counter == 0 {
+                    Message.sendLoc(message: message, toID: self.currentUser!.id, completion: {(_) in
+                    }, conSwitch: self.conSwitch , sessionID: self.sessionid, locCounter: counter)
+                    counter += 1
                 }
-                self.conSendLocation = false
             } else {
                 self.locationManager.stopUpdatingLocation()
                 if self.canSendLocation {
