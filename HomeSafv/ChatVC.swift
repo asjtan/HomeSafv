@@ -78,9 +78,9 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         })
     }
     // start track session desmond
-    func setTrackSession(countswitch: Bool, sessionID: String, currsessionID: String)
+    func setTrackSession(countswitch: Bool, sessionID: String, currentsessionID: String)
     {
-        Message.settrackstatus(switcher: countswitch, toID: self.currentUser!.id, sessionid: sessionID, currsessID: currsessionid, completion: {(_) in
+        Message.settrackstatus(switcher: countswitch, toID: self.currentUser!.id, sessionid: sessionID, currsessID: currentsessionID, completion: {(_) in
         })
     }
     
@@ -155,13 +155,13 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         {
             print("stop")
             self.conSwitch = false
-            self.setTrackSession(countswitch: conSwitch, sessionID: self.currsessionid, currsessionID: self.currsessionid)
+            self.setTrackSession(countswitch: conSwitch, sessionID: self.currsessionid, currentsessionID: self.currsessionid)
         }
         else if self.conSwitch == false
         {
             print("start")
             self.conSwitch = true
-            self.setTrackSession(countswitch: conSwitch, sessionID: self.sessionid, currsessionID: self.sessionid)
+            self.setTrackSession(countswitch: conSwitch, sessionID: self.sessionid, currentsessionID: self.sessionid)
             self.currsessionid = id
         }
         self.animateExtraButtons(toHide: true)

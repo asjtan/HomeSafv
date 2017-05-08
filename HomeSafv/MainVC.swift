@@ -123,6 +123,7 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
             self.trackView.isHidden = true
             self.mapLocation.removeAnnotations(self.mapLocation.annotations)
             self.trackLocation.removeAnnotations(self.trackLocation.annotations)
+            self.removePolyline()
             let vc = self.viewControllers.last
             vc?.inputAccessoryView?.isHidden = false
         })
@@ -200,7 +201,22 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
         }
     }
     
+    func removePolyline()
+    {
+        // Overlays that must be removed from the map
+        var overlaysToRemove = [MKOverlay]()
         
+        // All overlays on the map
+        let overlays = self.trackLocation.overlays
+        
+        for overlay in overlays
+        {
+            overlaysToRemove.append(overlay)
+        }
+        
+        self.trackLocation.removeOverlays(overlaysToRemove)
+    }
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.strokeColor = UIColor.purple

@@ -260,6 +260,8 @@ class Message: NSObject {
                     let values = ["type" : "trackID", "fromID": currentUserID, "id": currID , "switch": flag, "session": currsessID]
                     FIRDatabase.database().reference().child("tracksession").child(sessionid).childByAutoId().setValue(values, withCompletionBlock: { (error, _) in
                         if error == nil {
+                            //FIRDatabase.database().reference().child("users").child(currentUserID).child("tracksession").child(toID).updateChildValues(values)
+                            //FIRDatabase.database().reference().child("users").child(toID).child("tracksession").child(currentUserID).updateChildValues(values)
                             completion(true)
                         } else {
                             completion(false)
@@ -272,6 +274,7 @@ class Message: NSObject {
                     FIRDatabase.database().reference().child("tracksession").child(sessionid).childByAutoId().setValue(values, withCompletionBlock: { (error, reference)
                         in
                         FIRDatabase.database().reference().child("users").child(currentUserID).child("tracksession").child(toID).updateChildValues(values)
+                        FIRDatabase.database().reference().child("users").child(toID).child("tracksession").child(currentUserID).updateChildValues(values)
                         completion(true)
                     })
                 }
