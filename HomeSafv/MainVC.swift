@@ -164,6 +164,8 @@ class MainVC: UINavigationController, UICollectionViewDelegate, UICollectionView
                 self.trackView.isHidden = false
                 let messagesession  = notification.userInfo?["messagesession"] as! String
                 //use the session to pull out all lat and long from firebase
+                self.trackLocation.removeAnnotations(self.trackLocation.annotations)
+                self.removePolyline()
                 var llinfo = [String]()
                 let message = Message.init(type: .location, content: "", owner: .sender, timestamp: Int(Date().timeIntervalSince1970), isRead: false, locsession: "", locsesscount: "")
                 if let currentUserID = FIRAuth.auth()?.currentUser?.uid {
